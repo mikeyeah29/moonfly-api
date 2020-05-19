@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-	return view('welcome');
+	return redirect('/gigs');
 });
 
 Route::get('/gigs', 'GigsController@index')->name('gigs');
@@ -26,6 +26,14 @@ Route::get('/unavailable', 'UnavailableController@index')->name('unavailable');
 Route::post('/unavailable', 'UnavailableController@store')->name('unavailable.store');
 Route::get('/unavailable/add', 'UnavailableController@create')->name('unavailable.create');
 Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unavailable.destroy');
+
+Route::get('/songs', 'SongsController@index');
+Route::post('/songs', 'SongsController@store');
+
+Route::get('/setlists', 'SetlistController@index');
+Route::post('/setlists', 'SetlistController@store');
+
+Route::get('/world-domination', 'PagesController@wolrdDomination');
 
 Auth::routes();
 

@@ -20,7 +20,9 @@ class UnavailableController extends Controller
 
     public function index()
     {
-        $dates = UnavailableDate::where('user_id', Auth::id())->get();
+        $dates = UnavailableDate::where('user_id', Auth::id())
+                    ->whereDate('date', '>=', date("Y-m-d"))
+                    ->orderby('date', 'asc')->get();
 
     	return view('unavailable.index', [
     		'dates' => $dates
@@ -47,7 +49,15 @@ class UnavailableController extends Controller
         return redirect('/unavailable')->with('success', 'Unavailable date added');
     }
 
-    public function destroy($id){
-    	
+    public function destroy($id)
+    {
+        $date = UnavailableDate::findOrFail($id);
+
+        if($date->user_id === Auth::id()){
+            $date->delete();
+            return back()->with('success', 'Date deleted');
+        }
+
+        return back()->with('error', 'Cant do that');
     }
 }

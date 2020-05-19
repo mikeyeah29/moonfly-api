@@ -33,7 +33,11 @@
 					<td>{{ $gig->revenue }}</td>
 					<td>{{ $gig->rider }}</td>
 					<td>
-						<div class="btn btn-danger">Delete</div>
+						<form action="{{ route('gigs.destroy', $gig->id) }}" method="post" onsubmit="return confirm('Are you sure?');"> 
+							@csrf
+							 {{ method_field('DELETE') }}
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
 					</td>
 				</tr>
 
