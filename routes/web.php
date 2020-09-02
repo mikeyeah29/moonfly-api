@@ -27,13 +27,13 @@ Route::post('/unavailable', 'UnavailableController@store')->name('unavailable.st
 Route::get('/unavailable/add', 'UnavailableController@create')->name('unavailable.create');
 Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unavailable.destroy');
 
-Route::get('/songs', 'SongsController@index');
-Route::post('/songs', 'SongsController@store');
+// Route::get('/songs', 'SongsController@index');
+// Route::post('/songs', 'SongsController@store');
 
-Route::get('/setlists', 'SetlistController@index');
-Route::post('/setlists', 'SetlistController@store');
+// Route::get('/setlists', 'SetlistController@index');
+// Route::post('/setlists', 'SetlistController@store');
 
-Route::get('/world-domination', 'PagesController@wolrdDomination');
+// Route::get('/world-domination', 'PagesController@wolrdDomination');
 
 Auth::routes();
 

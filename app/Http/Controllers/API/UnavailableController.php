@@ -4,7 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Unavailable;
+use App\UnavailableDate;
 use Auth;
 
 class UnavailableController extends Controller
