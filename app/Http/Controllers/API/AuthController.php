@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -22,31 +23,57 @@ class AuthController extends Controller
     public function signup(Request $request)
     {
         $request->validate([
-            'name' => 'required|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|confirmed'
         ]);
+
+        $avatarPath = null;
+
+        // check if image upload
+        if($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            // $fileName = $file->getClientOriginalName();
+            // store image
+            $url = Storage::disk('public')->putFileAs(
+                'users/' . $request->email . '/', 
+                $file,
+                'avatar.' . $file->extension()
+            );
+
+            $avatarPath = '/storage/app/public/' . $url;
+
+        } else {
+            $avatarPath = '/public/images/placeholders/user.png';
+        }
+
         $user = new User([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'avatar' => $avatarPath,
             'password' => bcrypt($request->password)
         ]);
+
         $user->save();
+        $user->sendEmailVerificationNotification();
 
         // login
-        $tokenResult = $user->createToken('Personal Access Token');
-        $token = $tokenResult->token;
-        if ($request->remember_me)
-            $token->expires_at = Carbon::now()->addWeeks(1);
-        $token->save();
+        // $tokenResult = $user->createToken('Personal Access Token');
+        // $token = $tokenResult->token;
+        // if ($request->remember_me)
+        //     $token->expires_at = Carbon::now()->addWeeks(1);
+        // $token->save();
 
         return response()->json([
-            'message' => 'Successfully created user!',
-            'access_token' => $tokenResult->accessToken,
-            'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
+            'message' => 'Successfully created user - email verification sent',
+        //    'access_token' => $tokenResult->accessToken,
+        //    'token_type' => 'Bearer',
+        //    'expires_at' => Carbon::parse(
+        //        $tokenResult->token->expires_at
+        //    )->toDateTimeString()
         ], 201);
     }
   
@@ -77,12 +104,20 @@ class AuthController extends Controller
         }
 
         $user = $request->user();
+
+        if(!$user->email_verified_at) {
+            return response()->json([
+                'message' => 'Email address not verified'
+            ], 401);
+        }
+
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->token;
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
         $token->save();
         return response()->json([
+            'message' => 'ok',
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse(

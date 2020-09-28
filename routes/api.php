@@ -27,7 +27,6 @@ Route::group([
   
     Route::group([
       'middleware' => 'auth:api'
-      // 'middleware' => ['auth:api', 'cors']
     ], function() {
 
         Route::get('logout', 'API\AuthController@logout');
@@ -37,34 +36,18 @@ Route::group([
 
 });
 
-// Route::group([
-//     'middleware' => 'cors'
-// ], function(){
-
-//     Route::get('yeah', function(){
-//         return response()->json(['hmm' => 'wha?']);
-//     }); 
-
-// });
-
 Route::group([
   'middleware' => 'auth:api',
-  // 'middleware' => ['auth:api']
 ], function() {
 
-    Route::get('gigs', 'API\GigsController@index');
-    Route::post('gigs', 'API\GigsController@store');
-    Route::delete('gigs/{id}', 'API\GigsController@destroy');
+    // Route::get('gigs', 'API\GigsController@index');
+    // Route::post('gigs', 'API\GigsController@store');
+    // Route::delete('gigs/{id}', 'API\GigsController@destroy');
 
-    Route::get('unavailable', 'API\UnavailableController@index');
-    Route::post('unavailable', 'API\UnavailableController@store');
-    Route::delete('unavailable/{id}', 'API\UnavailableController@destroy');
+    // Route::get('unavailable', 'API\UnavailableController@index');
+    // Route::post('unavailable', 'API\UnavailableController@store');
+    // Route::delete('unavailable/{id}', 'API\UnavailableController@destroy');
 
 });
-
-// Route::get('/wha', function() {
-//     return response()->json(['hmm' => 'wha?']);
-// });
-
 
 

@@ -11,19 +11,24 @@ class ApiAuthTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function before() {
+    private function before($verified = false) {
         \Artisan::call('passport:install');
         $user = new User([
-            'name' => 'Bob',
+            'first_name' => 'Bob',
+            'last_name' => 'Bobby',
             'email' => 'bob@bobby.com',
             'password' => bcrypt('abc123')
         ]);
+
+        if($verified) {
+            $user->email_verified_at = date("Y-m-d H:i:s");;
+        }
         $user->save();
     }
 
     public function testLoginIncorrectCredentials()
     {
-        $this->before();
+        $this->before(true);
 
         $response = $this->json('POST', '/api/auth/login', [
             'email' => 'yeah@hmm.com',
@@ -32,11 +37,30 @@ class ApiAuthTest extends TestCase
         ]);
 
         $response->assertStatus(401);
+        $response->assertJson([
+            'message' => 'Unauthorized'
+        ]);
     }
 
-    public function testLoginSuccess()
+    public function testLoginNotVerified()
     {
-        $this->before();
+        $this->before(false);
+
+        $response = $this->json('POST', '/api/auth/login', [
+            'email' => 'bob@bobby.com',
+            'password' => 'abc123',
+            'remember_me' => false
+        ]);
+
+        $response->assertStatus(401);
+        $response->assertJson([
+            'message' => 'Email address not verified'
+        ]);
+    }
+
+    public function testLoginVerified()
+    {
+        $this->before(true);
 
         $response = $this->json('POST', '/api/auth/login', [
             'email' => 'bob@bobby.com',
@@ -45,11 +69,14 @@ class ApiAuthTest extends TestCase
         ]);
 
         $response->assertStatus(200);
+        $response->assertJson([
+            'message' => 'ok'
+        ]);
     }
 
     public function testLoginReturnsAccessToken()
     {
-        $this->before();
+        $this->before(true);
 
         $response = $this->json('POST', '/api/auth/login', [
             'email' => 'bob@bobby.com',
@@ -66,7 +93,7 @@ class ApiAuthTest extends TestCase
 
     public function testGetLoggedInUser()
     {
-        $this->before();
+        $this->before(true);
 
         $user = factory(User::class)->create();
 

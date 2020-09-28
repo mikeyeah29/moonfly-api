@@ -50,10 +50,10 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('gigs') }}">Gigs</a>
+                                <a class="nav-link" href="{{ route('docs.index') }}">Docs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('unavailable') }}">Unavailable Dates</a>
+                                <a class="nav-link" href="{{ route('test.index') }}">Tests</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

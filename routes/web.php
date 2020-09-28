@@ -14,18 +14,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-	return redirect('/gigs');
+	return redirect('/login');
 });
 
-Route::get('/gigs', 'GigsController@index')->name('gigs');
-Route::post('/gigs', 'GigsController@store')->name('gigs.store');
-Route::get('/gigs/add', 'GigsController@create')->name('gigs.create');
-Route::delete('/gigs/{id}', 'GigsController@destroy')->name('gigs.destroy');
+// Route::get('/gigs', 'GigsController@index')->name('gigs');
+// Route::post('/gigs', 'GigsController@store')->name('gigs.store');
+// Route::get('/gigs/add', 'GigsController@create')->name('gigs.create');
+// Route::delete('/gigs/{id}', 'GigsController@destroy')->name('gigs.destroy');
 
-Route::get('/unavailable', 'UnavailableController@index')->name('unavailable');
-Route::post('/unavailable', 'UnavailableController@store')->name('unavailable.store');
-Route::get('/unavailable/add', 'UnavailableController@create')->name('unavailable.create');
-Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unavailable.destroy');
+// Route::get('/unavailable', 'UnavailableController@index')->name('unavailable');
+// Route::post('/unavailable', 'UnavailableController@store')->name('unavailable.store');
+// Route::get('/unavailable/add', 'UnavailableController@create')->name('unavailable.create');
+// Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unavailable.destroy');
 
 // Route::get('/songs', 'SongsController@index');
 // Route::post('/songs', 'SongsController@store');
@@ -38,3 +38,16 @@ Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unava
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// TESTING IDEAS
+Route::get('/test', 'TestController@index')->name('test.index');
+Route::get('/test/upload', 'TestController@showImageUpload')->name('test.get.upload');
+Route::post('/test/upload', 'TestController@imageUpload')->name('test.post.upload');
+
+// DOCUMENTATION
+Route::get('/docs', 'DocsController@index')->name('docs.index');
+
+// verification
+Route::get('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
