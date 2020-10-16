@@ -17,24 +17,6 @@ Route::get('/', function () {
 	return redirect('/login');
 });
 
-// Route::get('/gigs', 'GigsController@index')->name('gigs');
-// Route::post('/gigs', 'GigsController@store')->name('gigs.store');
-// Route::get('/gigs/add', 'GigsController@create')->name('gigs.create');
-// Route::delete('/gigs/{id}', 'GigsController@destroy')->name('gigs.destroy');
-
-// Route::get('/unavailable', 'UnavailableController@index')->name('unavailable');
-// Route::post('/unavailable', 'UnavailableController@store')->name('unavailable.store');
-// Route::get('/unavailable/add', 'UnavailableController@create')->name('unavailable.create');
-// Route::delete('/unavailable/{id}', 'UnavailableController@destroy')->name('unavailable.destroy');
-
-// Route::get('/songs', 'SongsController@index');
-// Route::post('/songs', 'SongsController@store');
-
-// Route::get('/setlists', 'SetlistController@index');
-// Route::post('/setlists', 'SetlistController@store');
-
-// Route::get('/world-domination', 'PagesController@wolrdDomination');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -46,6 +28,8 @@ Route::post('/test/upload', 'TestController@imageUpload')->name('test.post.uploa
 
 // DOCUMENTATION
 Route::get('/docs', 'DocsController@index')->name('docs.index');
+Route::get('/docs/api', 'DocsController@apiRef')->name('docs.api.ref');
+Route::get('/docs/schema', 'DocsController@dbSchema')->name('docs.db.schema');
 
 // verification
 Route::get('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
