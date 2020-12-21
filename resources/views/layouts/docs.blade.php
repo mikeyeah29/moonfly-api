@@ -33,7 +33,7 @@
                     <a href="{{ route('docs.index') }}">Overview</a>
                 </li>
                 <li>
-                    <a href="schema.text">Database Schema</a>
+                    <a href="{{ route('docs.schema') }}">Database Schema</a>
                 </li>
                 <li>
                     <a href="{{ route('docs.api.ref') }}">API Reference</a>
