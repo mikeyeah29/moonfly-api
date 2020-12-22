@@ -21,17 +21,21 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// TESTING IDEAS
-Route::get('/test', 'TestController@index')->name('test.index');
-Route::get('/test/upload', 'TestController@showImageUpload')->name('test.get.upload');
-Route::post('/test/upload', 'TestController@imageUpload')->name('test.post.upload');
+// verification
+Route::get('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+Route::get('/email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+Route::post('/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
 // DOCUMENTATION
 Route::get('/docs', 'DocsController@index')->name('docs.index');
 Route::get('/docs/api', 'DocsController@apiRef')->name('docs.api.ref');
 Route::get('/docs/schema', 'DocsController@dbSchema')->name('docs.schema');
 
-// verification
-Route::get('/email/verify', 'Auth\VerificationController@show')->name('verification.notice');
-Route::get('/email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-Route::post('/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+// TESTING IDEAS
+Route::get('/test', 'TestController@index')->name('test.index');
+Route::get('/test/upload', 'TestController@showImageUpload')->name('test.get.upload');
+Route::post('/test/upload', 'TestController@imageUpload')->name('test.post.upload');
+
+// user role tests...
+
+// Route::get('/docs/admin', 'DocsController@admin')->name('docs.admin');

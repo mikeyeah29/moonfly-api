@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Lib\Roles\UserRole;
 
 class DocsController extends Controller
 {
 	public function __construct()
     {
-        $this->middleware(['auth', 'verified']);
+        $this->middleware(['auth', 'verified', 'check_user_role:' . UserRole::ROLE_DEV]);
     }
 
     public function index() {

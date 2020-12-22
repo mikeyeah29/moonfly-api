@@ -78,6 +78,7 @@ class ProfileTest extends TestCase
         $this->assertStringContainsString('avatar.png', $user->avatar);
         $this->assertTrue($user->phone === '01234 567890');
         $this->assertTrue($user->email_verified_at === null);
+        $this->assertContains('ROLE_SUBSCRIBER', $user->roles);
     }
 
     public function testSignUpCreatesUserWithOutOptionalFeilds()

@@ -181,6 +181,11 @@
                         Image preview before upload
                     </a>
                 </li>
+                <li>
+                    <a class="link" href="https://medium.com/@tomgrohl/implementing-user-roles-into-a-laravel-application-f8b9b5c266a7">
+                        User roles
+                    </a>
+                </li>
             </ul>
 
         </div>
