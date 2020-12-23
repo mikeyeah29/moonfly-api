@@ -23,23 +23,31 @@
 
 <body>
 
+    @include('../includes/main_nav')
+
     @yield('side_bar')
 
     <div class="main container-fluid">
 
-        <nav class="main_nav">
-            <ul class="no_bullet">
-                <li>
-                    <a href="{{ route('docs.index') }}">Overview</a>
-                </li>
-                <li>
-                    <a href="{{ route('docs.schema') }}">Database Schema</a>
-                </li>
-                <li>
-                    <a href="{{ route('docs.api.ref') }}">API Reference</a>
-                </li>
-            </ul>
-        </nav>
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="col-sm-9 col-lg-8">
+
+                <nav class="docs_nav">
+                    <ul class="no_bullet">
+                        <li>
+                            <a href="{{ route('docs.index') }}">Overview</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('docs.schema') }}">Database Schema</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('docs.api.ref') }}">API Reference</a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
 
         @yield('content')
 

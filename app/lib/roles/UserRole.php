@@ -18,8 +18,12 @@ class UserRole {
         self::ROLE_ADMIN => [
             self::ROLE_EDITOR,
             self::ROLE_SUBSCRIBER,
+            self::ROLE_DEV
         ],
         self::ROLE_EDITOR => [
+            self::ROLE_SUBSCRIBER
+        ],
+        self::ROLE_DEV => [
             self::ROLE_SUBSCRIBER
         ],
         self::ROLE_SUBSCRIBER => []

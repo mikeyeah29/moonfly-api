@@ -36,10 +36,18 @@ class CheckUserRole
     public function handle($request, Closure $next, $role)
     {
         /** @var User $user */
-        $user = Auth::user();
+        $user = ($request->expectsJson() ? auth('api')->user() : Auth::user());
 
         if ( ! $this->roleChecker->check($user, $role)) {
-            throw new AuthorizationException('You do not have permission to view this page');
+
+            if (!$request->expectsJson()) {
+                return back();
+                // throw new AuthorizationException('You do not have permission to view this page');
+            }else{
+                // json respone
+                return response()->json(['error' => 'Cant do that'], 403);
+            }
+
         }
 
         return $next($request);

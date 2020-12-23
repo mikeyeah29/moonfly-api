@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Lib\Roles\UserRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,3 @@ Route::get('/docs/schema', 'DocsController@dbSchema')->name('docs.schema');
 Route::get('/test', 'TestController@index')->name('test.index');
 Route::get('/test/upload', 'TestController@showImageUpload')->name('test.get.upload');
 Route::post('/test/upload', 'TestController@imageUpload')->name('test.post.upload');
-
-// user role tests...
-
-// Route::get('/docs/admin', 'DocsController@admin')->name('docs.admin');

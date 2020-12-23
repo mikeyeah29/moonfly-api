@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use \App\User;
+use App\Lib\Roles\UserRole;
 
 class UserCommand extends Command
 {
@@ -41,7 +42,7 @@ class UserCommand extends Command
     {
         $role = $this->choice(
             'What role does this user have?',
-            ['ROLE_SUBSCRIBER', 'ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_SUPER_ADMIN'],
+            UserRole::getRoleList(),
         );
 
         if($role === 'ROLE_SUPER_ADMIN') {

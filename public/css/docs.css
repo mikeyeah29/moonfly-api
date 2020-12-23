@@ -36,10 +36,10 @@ h1, h2, h3, h4 {
     background: #553a94;
     /*background: #63bd84;*/
     position: fixed;
-    top: 0px;
+    top: 55px;
     left: 0px;
     height: 100%;
-    padding: 20px;
+    padding: 20px 20px 20px 30px;
     color: #e5dbfd;
 }
 
@@ -127,6 +127,32 @@ a.link {
     padding: 20px 0px 20px 20px;
 }
 
+.docs_nav {
+    margin-top: 80px;
+}
 
+.docs_nav ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+.docs_nav li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.docs_nav li a {
+    color: #456;
+    text-decoration: underline;
+}
+
+/* global? */
+
+.laravel_nav {
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background: #fff;
+}
 
 

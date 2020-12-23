@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Lib\Roles\UserRole;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,4 +50,14 @@ Route::group([
     // Route::delete('unavailable/{id}', 'API\UnavailableController@destroy');
 
 });
+
+Route::group([
+    'middleware' => 'auth:api',
+    'middleware' => 'check_user_role:' . UserRole::ROLE_DEV,
+], function() {
+
+    // 
+
+});
+
 

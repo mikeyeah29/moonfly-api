@@ -17,16 +17,17 @@ class RoleChecker
      */
     public function check(User $user, string $role)
     {
-        // Admin has everything
+        if(!$user->roles) {
+            return false;
+        }
+
+        // Super Admin has everything
         if ($user->hasRole(UserRole::ROLE_SUPER_ADMIN)) {
             return true;
         }
-        else if($user->hasRole(UserRole::ROLE_ADMIN)) {
-            $managementRoles = UserRole::getAllowedRoles(UserRole::ROLE_ADMIN);
 
-            if (in_array($role, $managementRoles)) {
-                return true;
-            }
+        if (in_array($role, UserRole::getAllowedRoles($role))) {
+            return true;
         }
 
         return $user->hasRole($role);

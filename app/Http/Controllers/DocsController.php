@@ -9,7 +9,7 @@ class DocsController extends Controller
 {
 	public function __construct()
     {
-        $this->middleware(['auth', 'verified', 'check_user_role:' . UserRole::ROLE_DEV]);
+        $this->middleware(['auth', 'verified', 'check_user_role:' . UserRole::ROLE_ADMIN]);
     }
 
     public function index() {

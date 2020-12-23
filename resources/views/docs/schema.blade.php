@@ -22,6 +22,7 @@ Table users {
   id int
   first_name varchar
   last_name varchar
+  roles text
   avatar varchar
   email varchar
   email_verified_at datetime
