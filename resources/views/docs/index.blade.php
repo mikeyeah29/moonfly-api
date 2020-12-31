@@ -124,24 +124,37 @@
                 <li>
                     run <code>php artisan test (optional)</code>
                 </li>
+                <li>
+                    <p>Create a super admin account (there is only one super admin user)</p>
+                    <p>run <code>php artisan user:create</code></p>
+                    <p>Select Super Admin</p>
+                </li>
             </ol>
 
         </div>
 
         <div class="section mb-2 mt-4" id="section-user-roles">
+            
             <p class="hdln-2">User Roles</p>
 
-            <code>
-                <pre>
-                - user
-                    someone who uses the app
-                - admin
-                    someone behind the orgazination who can do things on an admin level, look at data etc but cant do eveything super admin can do
-                - super admin
-                    controls the app itself, used for technical stuff etc is really the owner of the app
-                    can manage all other user accounts
-                </pre>
-            </code>
+            <p>
+                There are currently 5 user roles. 
+            </p>
+
+            <ol>
+                <li>Subscriber</li>
+                <li>Editor</li>
+                <li>Developer</li>
+                <li>Admin</li>
+                <li>Super Admin</li>
+            </ol>
+
+            <p>
+                Routes can be restricted by adding the middleware 'check_user_role:' . UserRole::ROLE_ADMIN in the routes file or controller.
+            </p>
+            <p>
+                Role names and role hierarchy can be seen in app\lib\roles\UserRole
+            </p>
 
         </div>
 
